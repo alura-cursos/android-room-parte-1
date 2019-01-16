@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 import br.com.alura.agenda.database.dao.AlunoDAO;
 import br.com.alura.agenda.model.Aluno;
 
-@Database(entities = {Aluno.class}, version = 2, exportSchema = false)
+@Database(entities = {Aluno.class}, version = 3, exportSchema = false)
 public abstract class AgendaDatabase extends RoomDatabase {
 
     private static final String NOME_BANCO_DE_DADOS = "agenda.db";
@@ -26,6 +26,17 @@ public abstract class AgendaDatabase extends RoomDatabase {
                     @Override
                     public void migrate(@NonNull SupportSQLiteDatabase database) {
                         database.execSQL("ALTER TABLE aluno ADD COLUMN sobrenome TEXT");
+                    }
+                }, new Migration(2, 3) {
+                    @Override
+                    public void migrate(@NonNull SupportSQLiteDatabase database) {
+                        // Criar nova tabela com as informações desejadas
+
+                        // Copiar dados da tabela antiga para a nova
+
+                        // Remove tabela antiga
+
+                        // Renomear a tabela nova com o nome da tabela antiga
                     }
                 })
                 .build();
