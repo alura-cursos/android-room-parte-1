@@ -5,4 +5,5 @@
     <string name="email">E-mail</string>
     <string name="salvar_aluno">Salvar o aluno</string>
     <string name="remover">Remover</string>
+    <string name="sobrenome">Sobrenome</string>
 </resources>
