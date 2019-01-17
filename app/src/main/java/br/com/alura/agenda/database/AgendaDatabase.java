@@ -31,12 +31,21 @@ public abstract class AgendaDatabase extends RoomDatabase {
                     @Override
                     public void migrate(@NonNull SupportSQLiteDatabase database) {
                         // Criar nova tabela com as informações desejadas
+                        database.execSQL("CREATE TABLE IF NOT EXISTS `Aluno_novo` " +
+                                "(`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                                "`nome` TEXT, " +
+                                "`telefone` TEXT, " +
+                                "`email` TEXT)");
 
                         // Copiar dados da tabela antiga para a nova
+                        database.execSQL("INSERT INTO Aluno_novo (id, nome, telefone, email) " +
+                                "SELECT id, nome, telefone, email FROM Aluno");
 
                         // Remove tabela antiga
+                        database.execSQL("DROP TABLE Aluno");
 
                         // Renomear a tabela nova com o nome da tabela antiga
+                        database.execSQL("ALTER TABLE Aluno_novo RENAME TO Aluno");
                     }
                 })
                 .build();
