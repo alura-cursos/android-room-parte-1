@@ -4,14 +4,17 @@ import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
+import android.arch.persistence.room.TypeConverters;
 import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import br.com.alura.agenda.database.converter.ConversorCalendar;
 import br.com.alura.agenda.database.dao.AlunoDAO;
 import br.com.alura.agenda.model.Aluno;
 
-@Database(entities = {Aluno.class}, version = 3, exportSchema = false)
+@Database(entities = {Aluno.class}, version = 4, exportSchema = false)
+@TypeConverters({ConversorCalendar.class})
 public abstract class AgendaDatabase extends RoomDatabase {
 
     private static final String NOME_BANCO_DE_DADOS = "agenda.db";
@@ -25,7 +28,7 @@ public abstract class AgendaDatabase extends RoomDatabase {
                 .addMigrations(new Migration(1, 2) {
                     @Override
                     public void migrate(@NonNull SupportSQLiteDatabase database) {
-                        database.execSQL("ALTER TABLE aluno ADD COLUMN sobrenome TEXT");
+                        database.execSQL("ALTER TABLE Aluno ADD COLUMN sobrenome TEXT");
                     }
                 }, new Migration(2, 3) {
                     @Override
@@ -46,6 +49,11 @@ public abstract class AgendaDatabase extends RoomDatabase {
 
                         // Renomear a tabela nova com o nome da tabela antiga
                         database.execSQL("ALTER TABLE Aluno_novo RENAME TO Aluno");
+                    }
+                }, new Migration(3, 4) {
+                    @Override
+                    public void migrate(@NonNull SupportSQLiteDatabase database) {
+                        database.execSQL("ALTER TABLE Aluno ADD COLUMN momentoDeCadastro INTEGER");
                     }
                 })
                 .build();
