@@ -1,6 +1,6 @@
 package br.com.alura.agenda.dao;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
