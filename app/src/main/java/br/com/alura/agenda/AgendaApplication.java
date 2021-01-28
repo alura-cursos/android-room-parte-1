@@ -1,9 +1,9 @@
 package br.com.alura.agenda;
 
 import android.app.Application;
-import android.arch.persistence.room.Room;
 
-import br.com.alura.agenda.dao.AlunoDAO;
+import androidx.room.Room;
+
 import br.com.alura.agenda.database.AgendaDatabase;
 import br.com.alura.agenda.database.dao.RoomAlunoDAO;
 import br.com.alura.agenda.model.Aluno;
